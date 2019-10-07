@@ -18,6 +18,11 @@ output "function_qualified_arn" {
   value       = aws_lambda_function.lambda.qualified_arn
 }
 
+output "function_version" {
+  description = "The deployed lambda version"
+  value       = aws_lambda_function.lambda.version
+}
+
 output "role_arn" {
   description = "The ARN of the IAM role created for the Lambda function"
   value       = aws_iam_role.lambda.arn

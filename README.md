@@ -1,5 +1,9 @@
 # terraform-aws-lambda
 
+Fork of [claranet/terraform-aws-lambda](https://github.com/claranet/terraform-aws-lambda)@[v1.2.0](https://github.com/claranet/terraform-aws-lambda/tree/v1.2.0)... personalized mods, also likely downrev.
+
+---
+
 This Terraform module creates and uploads an AWS Lambda function and hides the ugly parts from you.
 
 ## Features
@@ -76,6 +80,7 @@ Inputs for this module are the same as the [aws_lambda_function](https://www.ter
 | build\_command | The command to run to create the Lambda package zip file | `string` | `"python build.py '$filename' '$runtime' '$source'"` | no |
 | build\_paths | The files or directories used by the build command, to trigger new Lambda package builds whenever build scripts change | `list(string)` | `["build.py"]` | no |
 | cloudwatch\_logs | Set this to false to disable logging your Lambda output to CloudWatch Logs | `bool` | `true` | no |
+| cloudwatch\_logs\_retention | Set this to define how many days log entries are retained in CloudWatch Logs | `int` | `7` | no |
 | lambda\_at\_edge | Set this to true if using Lambda@Edge, to enable publishing, limit the timeout, and allow edgelambda.amazonaws.com to invoke the function | `bool` | `false` | no |
 | policy | An additional policy to attach to the Lambda function role | `object({json=string})` | | no |
 | trusted\_entities | Additional trusted entities for the Lambda function. The lambda.amazonaws.com (and edgelambda.amazonaws.com if lambda\_at\_edge is true) is always set  | `list(string)` | | no |
@@ -97,5 +102,6 @@ The following arguments from the [aws_lambda_function](https://www.terraform.io/
 | function\_invoke\_arn | The Invoke ARN of the Lambda function |
 | function\_name | The name of the Lambda function |
 | function\_qualified\_arn | The qualified ARN of the Lambda function |
+| function\_version | The version of the deployed Lamnbda function |
 | role\_arn | The ARN of the IAM role created for the Lambda function |
 | role\_name | The name of the IAM role created for the Lambda function |

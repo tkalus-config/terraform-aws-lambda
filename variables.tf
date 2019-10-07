@@ -37,6 +37,12 @@ variable "cloudwatch_logs" {
   default     = true
 }
 
+variable "cloudwatch_logs_retention" {
+  description = "Set this to define how many days log entries are retained in CloudWatch Logs"
+  type        = number
+  default     = 7
+}
+
 variable "lambda_at_edge" {
   description = "Set this to true if using Lambda@Edge, to enable publishing, limit the timeout, and allow edgelambda.amazonaws.com to invoke the function"
   type        = bool
@@ -58,6 +64,7 @@ variable "trusted_entities" {
 }
 
 locals {
+  iam_role_name = "${var.lambda_at_edge ? "lambda-edge" : "lambda"}-${var.function_name}"
   publish = var.lambda_at_edge ? true : var.publish
   timeout = var.lambda_at_edge ? min(var.timeout, 5) : var.timeout
 }

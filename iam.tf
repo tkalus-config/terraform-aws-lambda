@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "lambda" {
-  name               = var.function_name
+  name               = local.iam_role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   tags               = var.tags
 }
@@ -28,18 +28,6 @@ locals {
 
 data "aws_iam_policy_document" "logs" {
   count = var.cloudwatch_logs ? 1 : 0
-
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "logs:CreateLogGroup",
-    ]
-
-    resources = [
-      "*",
-    ]
-  }
 
   statement {
     effect = "Allow"

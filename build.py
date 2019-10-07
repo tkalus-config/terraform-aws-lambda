@@ -158,6 +158,7 @@ with tempdir() as temp_dir:
                     '--prefix=',
                     '--target=.',
                     '--requirement=requirements.txt',
+                    env={"PIP_REQUIRE_VIRTUALENV": ""},
                 )
 
     # Zip up the temporary directory and write it to the target filename.
